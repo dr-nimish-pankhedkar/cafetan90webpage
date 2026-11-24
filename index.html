@@ -156,38 +156,55 @@ section{position:relative;padding:clamp(5rem,11vw,9rem) 0}
   .nav .btn{display:none}
 }
 
-/* hero */
-.hero{min-height:100svh;display:flex;align-items:center;padding:8rem 0 4rem}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,5rem);align-items:center}
-.hero h1{font-size:clamp(3.1rem,8.4vw,7rem);line-height:.98}
-.hero h1 .inf{display:inline-block;font-style:normal;color:var(--gold);font-weight:400;transform:translateY(.04em)}
-.hero .tag{font-family:var(--script);font-size:clamp(1.3rem,2.4vw,1.8rem);color:var(--gold-d);margin:1.2rem 0 1.4rem;transform:rotate(-2deg);display:inline-block}
-.hero .ctas{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
-.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.2rem}
-.chip{font-size:.78rem;padding:.42rem .85rem;border-radius:999px;background:var(--white);border:1px solid var(--sand)}
-.hero-art{position:relative;justify-self:end;width:min(100%,460px)}
-.arch{border-radius:180px 180px var(--r) var(--r);overflow:hidden;aspect-ratio:1511/1640;box-shadow:0 40px 80px -40px rgba(58,42,30,.55)}
-.arch img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
-.arch:hover img{transform:scale(1.08)}
-.hero-art .mini{position:absolute;left:-18%;bottom:8%;width:46%;border-radius:var(--r);overflow:hidden;border:6px solid var(--cream);box-shadow:0 24px 50px -20px rgba(58,42,30,.5);transform:rotate(-5deg)}
-.seal{position:absolute;right:-7%;bottom:-6%;width:132px;height:132px}
-.seal svg{width:100%;height:100%;animation:spin 26s linear infinite}
-.seal img{position:absolute;inset:26%;width:48%;border-radius:50%}
-@keyframes spin{to{transform:rotate(360deg)}}
+/* hero: full-bleed photo collage */
+.hero{position:relative;min-height:100svh;background:#1d140d;color:var(--cream);padding:0;overflow:hidden;display:block}
+.collage{position:absolute;top:0;bottom:0;right:0;left:43%;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:6px}
+.collage figure{margin:0;overflow:hidden;position:relative}
+.collage img{width:100%;height:100%;object-fit:cover;animation:kb 18s ease-in-out infinite alternate}
+.collage::before{content:"";position:absolute;inset:0 0 auto;height:120px;z-index:1;background:linear-gradient(rgba(20,13,8,.65),rgba(20,13,8,0));pointer-events:none}
+.collage .c1{grid-row:span 2}
+.collage .c4{grid-column:span 2}
+.collage .c2 img{animation-delay:-4s}.collage .c3 img{animation-delay:-8s}.collage .c4 img{animation-delay:-12s}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.1) translate(-1.5%,-1%)}}
+.hero::after{content:"";position:absolute;top:0;bottom:0;left:43%;width:12%;background:linear-gradient(90deg,#1d140d,rgba(29,20,13,0));pointer-events:none}
+.hero-copy{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:7rem 0 4rem}
+.hero-copy>*{max-width:min(520px,40vw)}
+.hero .eyebrow{color:var(--gold)}
+.hero h1{font-size:clamp(2.8rem,5.4vw,5.4rem);line-height:1;font-weight:500;color:#fff}
+.hero h1 em{color:var(--gold)}
+.hero h1 .inf{display:inline-block;font-style:normal;color:var(--gold);font-weight:400}
+.hero .tag{font-family:var(--script);font-size:clamp(1.2rem,2vw,1.6rem);color:#F4D9A8;margin:1rem 0;transform:rotate(-2deg);display:inline-block}
+.hero .lede{color:rgba(251,243,230,.82)}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.8rem}
+.btn-light{background:var(--cream);color:var(--ink)}
+.btn-light:hover{background:var(--gold);color:var(--ink);transform:translateY(-2px)}
+.btn-ghost{border:1px solid rgba(251,243,230,.55);color:var(--cream)}
+.btn-ghost:hover{background:rgba(251,243,230,.14)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.8rem}
+.chip{font-size:.78rem;padding:.42rem .85rem;border-radius:999px;background:rgba(251,243,230,.08);border:1px solid rgba(251,243,230,.22);color:var(--cream)}
+.scroll-cue{display:none}
 @media (max-width:860px){
-  .arch{border-radius:130px 130px var(--r) var(--r)}
-  .hero{padding-top:7rem}
-  .hero .wrap{grid-template-columns:1fr}
-  .hero-art{justify-self:center;width:min(84%,400px);margin-top:1rem}
-  .seal{width:104px;height:104px;right:-8%}
+  .hero{display:flex;flex-direction:column;min-height:0}
+  .collage{position:relative;left:auto;height:62svh;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr 1fr;order:0}
+  .hero::after{left:0;right:0;width:auto;top:auto;bottom:auto;height:0}
+  .hero-copy{min-height:0;padding:2.2rem 0 3rem}
+  .hero-copy>*{max-width:none}
+  .hero h1{font-size:clamp(2.5rem,11vw,3.4rem)}
 }
 
-/* marquee */
-.marquee{background:var(--ink);color:var(--cream);overflow:hidden;padding:1.1rem 0;transform:rotate(-1.2deg);margin:0 -2vw;position:relative;z-index:2}
-.marquee .track{display:flex;width:max-content;animation:slide 38s linear infinite}
-.marquee span{font:italic 400 clamp(1.3rem,2.6vw,2rem)/1 var(--serif);padding:0 1.4rem;white-space:nowrap;display:flex;align-items:center;gap:2.8rem}
-.marquee span::after{content:"∞";font-style:normal;color:var(--gold)}
+/* photo strip */
+.strip{background:var(--ink);padding:14px 0;overflow:hidden}
+.strip .track{display:flex;gap:14px;width:max-content;animation:slide 60s linear infinite}
+.strip:hover .track{animation-play-state:paused}
+.strip figure{margin:0;flex:none;height:clamp(170px,22vw,260px);aspect-ratio:4/5;border-radius:14px;overflow:hidden}
+.strip figure.w{aspect-ratio:4/3}
+.strip img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.strip figure:hover img{transform:scale(1.06)}
 @keyframes slide{to{transform:translateX(-50%)}}
+
+/* nav over dark hero */
+.nav:not(.scrolled):not(.open){color:var(--cream)}
+.nav:not(.scrolled) .btn-dark{background:var(--cream);color:var(--ink)}
 
 /* story */
 .story .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2.5rem,6vw,6rem);align-items:center}
@@ -369,51 +386,48 @@ footer{background:var(--ink);color:rgba(251,243,230,.7);padding:5rem 0 2rem;font
 
 <!-- HERO -->
 <section class="hero" aria-labelledby="h1">
-  <div class="wrap">
-    <div>
-      <p class="eyebrow rv">100% Vegetarian Café · Canada Corner, Nashik</p>
-      <h1 id="h1" class="rv d1">Infinite bonds,<br><em>infinite</em> tastes <span class="inf">∞</span></h1>
-      <span class="tag rv d2">a café built by two foodie engineers</span>
-      <p class="lede rv d2">Puneri Shev Pav, Surti Cold Coco and Makhana Chat, served on Indian floor seating, with board games on the shelf and room for your birthday. A cosy, pure-veg café a short walk from Nashik's coaching centres.</p>
-      <div class="ctas rv d3">
-        <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Cafe+Tan+90+Ameya+Sankul+Canada+Corner+Nashik" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-          Get directions</a>
-        <a class="btn btn-line" href="#menu">See the menu</a>
-      </div>
-      <div class="chips rv d3" aria-label="Highlights">
-        <span class="chip">Pure Veg</span><span class="chip">Jain options</span><span class="chip">Bhartiya Baithak</span><span class="chip">Board games</span><span class="chip">Birthday parties</span>
-      </div>
+  <div class="collage" aria-hidden="false">
+    <figure class="c1"><picture><source srcset="img/food-shevpav-closeup-outdoor.webp" type="image/webp"><img src="img/food-shevpav-closeup-outdoor.jpg" alt="Puneri Shev Pav loaded with sev and cheese at Café Tan 90° Nashik" width="1600" height="1200"></picture></figure>
+    <figure class="c2"><picture><source srcset="img/food-makhana-chat-beverage-combo.webp" type="image/webp"><img src="img/food-makhana-chat-beverage-combo.jpg" alt="Makhana Chat with a cold coffee" width="1200" height="1600"></picture></figure>
+    <figure class="c3"><picture><source srcset="img/food-shevpav-coldcoco-combo.webp" type="image/webp"><img src="img/food-shevpav-coldcoco-combo.jpg" alt="Surti Cold Coco with Shev Pav" width="688" height="826"></picture></figure>
+    <figure class="c4"><picture><source srcset="img/cafe-baithak-wide.webp" type="image/webp"><img src="img/cafe-baithak-wide.jpg" alt="Bhartiya Baithak floor seating at Café Tan 90°" width="1600" height="1200"></picture></figure>
+  </div>
+  <div class="wrap hero-copy">
+    <p class="eyebrow rv">100% Vegetarian Café · Canada Corner, Nashik</p>
+    <h1 id="h1" class="rv d1">Infinite bonds, <em>infinite</em> tastes <span class="inf">∞</span></h1>
+    <span class="tag rv d2">a café built by two foodie engineers</span>
+    <p class="lede rv d2">Puneri Shev Pav, Surti Cold Coco and Makhana Chat, served on Indian floor seating, with board games on the shelf and room for your birthday.</p>
+    <div class="ctas rv d3">
+      <a class="btn btn-light" href="https://www.google.com/maps/search/?api=1&amp;query=Cafe+Tan+90+Ameya+Sankul+Canada+Corner+Nashik" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        Get directions</a>
+      <a class="btn btn-ghost" href="#menu">See the menu</a>
     </div>
-
-    <div class="hero-art rv d2">
-      <div class="arch">
-        <picture>
-          <source srcset="img/cafe-exterior-night-view.webp" type="image/webp">
-          <img src="img/cafe-exterior-night-view.jpg" alt="Café Tan 90° storefront at night, Canada Corner, Nashik" width="1511" height="1600" fetchpriority="high">
-        </picture>
-      </div>
-      <div class="mini">
-        <picture>
-          <source srcset="img/food-shevpav-closeup-outdoor.webp" type="image/webp">
-          <img src="img/food-shevpav-closeup-outdoor.jpg" alt="Puneri Shev Pav loaded with sev and cheese" width="1600" height="1200" loading="lazy">
-        </picture>
-      </div>
-      <div class="seal" aria-hidden="true">
-        <svg viewBox="0 0 200 200"><defs><path id="c" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
-          <circle cx="100" cy="100" r="98" fill="#FBF3E6"/>
-          <text font-family="Poppins" font-size="15" letter-spacing="5" fill="#3A2A1E"><textPath href="#c">INFINITE BONDS · INFINITE TASTES · </textPath></text>
-        </svg>
-        <img src="img/logo.png" alt="" width="64" height="64">
-      </div>
+    <div class="chips rv d3" aria-label="Highlights">
+      <span class="chip">Pure Veg</span><span class="chip">Jain options</span><span class="chip">Bhartiya Baithak</span><span class="chip">Board games</span><span class="chip">Birthday parties</span>
     </div>
   </div>
+  <span class="scroll-cue" aria-hidden="true">Scroll</span>
 </section>
 
-<div class="marquee" aria-hidden="true">
+<div class="strip" aria-label="Photos from Café Tan 90°">
   <div class="track">
-    <span>Puneri Shev Pav</span><span>Surti Cold Coco</span><span>Makhana Chat</span><span>Mumbai Ka Masala Khichiya</span><span>Chai &amp; Bun Maska</span><span>Kairi Panna</span><span>Tan 90° Special Sandwich</span>
-    <span>Puneri Shev Pav</span><span>Surti Cold Coco</span><span>Makhana Chat</span><span>Mumbai Ka Masala Khichiya</span><span>Chai &amp; Bun Maska</span><span>Kairi Panna</span><span>Tan 90° Special Sandwich</span>
+    <figure><picture><source srcset="img/cafe-exterior-night-view.webp" type="image/webp"><img src="img/cafe-exterior-night-view.jpg" alt="Café Tan 90° storefront at night" width="1511" height="1600" loading="lazy"></picture></figure>
+    <figure class="w"><picture><source srcset="img/food-shevpav-duo-plate.webp" type="image/webp"><img src="img/food-shevpav-duo-plate.jpg" alt="Shev Pav cut in half" width="1600" height="1200" loading="lazy"></picture></figure>
+    <figure><picture><source srcset="img/food-makhana-chat-khicha-combo.webp" type="image/webp"><img src="img/food-makhana-chat-khicha-combo.jpg" alt="Masala Khichiya and Makhana Chat" width="688" height="826" loading="lazy"></picture></figure>
+    <figure><picture><source srcset="img/cafe-interior-entry-view.webp" type="image/webp"><img src="img/cafe-interior-entry-view.jpg" alt="Counter and staircase" width="1200" height="1600" loading="lazy"></picture></figure>
+    <figure class="w"><picture><source srcset="img/cafe-floor-seating-birdseye.webp" type="image/webp"><img src="img/cafe-floor-seating-birdseye.jpg" alt="Floor seating and bookshelf" width="1600" height="1200" loading="lazy"></picture></figure>
+    <figure><picture><source srcset="img/cafe-interior-first-floor-birthday-decor.webp" type="image/webp"><img src="img/cafe-interior-first-floor-birthday-decor.jpg" alt="Birthday decoration" width="1200" height="1600" loading="lazy"></picture></figure>
+    <figure><picture><source srcset="img/cafe-first-floor-interior-wide.webp" type="image/webp"><img src="img/cafe-first-floor-interior-wide.jpg" alt="Table seating with brick wall" width="1200" height="1600" loading="lazy"></picture></figure>
+    <figure><picture><source srcset="img/food-shevpav-coldcoco-combo.webp" type="image/webp"><img src="img/food-shevpav-coldcoco-combo.jpg" alt="Surti Cold Coco" width="688" height="826" loading="lazy"></picture></figure>
+    <figure><picture><source srcset="img/cafe-exterior-night-view.webp" type="image/webp"><img src="img/cafe-exterior-night-view.jpg" alt="" width="1511" height="1600" loading="lazy"></picture></figure>
+    <figure class="w"><picture><source srcset="img/food-shevpav-duo-plate.webp" type="image/webp"><img src="img/food-shevpav-duo-plate.jpg" alt="" width="1600" height="1200" loading="lazy"></picture></figure>
+    <figure><picture><source srcset="img/food-makhana-chat-khicha-combo.webp" type="image/webp"><img src="img/food-makhana-chat-khicha-combo.jpg" alt="" width="688" height="826" loading="lazy"></picture></figure>
+    <figure><picture><source srcset="img/cafe-interior-entry-view.webp" type="image/webp"><img src="img/cafe-interior-entry-view.jpg" alt="" width="1200" height="1600" loading="lazy"></picture></figure>
+    <figure class="w"><picture><source srcset="img/cafe-floor-seating-birdseye.webp" type="image/webp"><img src="img/cafe-floor-seating-birdseye.jpg" alt="" width="1600" height="1200" loading="lazy"></picture></figure>
+    <figure><picture><source srcset="img/cafe-interior-first-floor-birthday-decor.webp" type="image/webp"><img src="img/cafe-interior-first-floor-birthday-decor.jpg" alt="" width="1200" height="1600" loading="lazy"></picture></figure>
+    <figure><picture><source srcset="img/cafe-first-floor-interior-wide.webp" type="image/webp"><img src="img/cafe-first-floor-interior-wide.jpg" alt="" width="1200" height="1600" loading="lazy"></picture></figure>
+    <figure><picture><source srcset="img/food-shevpav-coldcoco-combo.webp" type="image/webp"><img src="img/food-shevpav-coldcoco-combo.jpg" alt="" width="688" height="826" loading="lazy"></picture></figure>
   </div>
 </div>
 
